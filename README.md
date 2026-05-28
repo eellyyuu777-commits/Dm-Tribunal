@@ -18,37 +18,51 @@ font-family:Inter,sans-serif;
 }
 
 body{
-background:#07070b;
+background:#06060a;
 color:white;
 overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* =========================================================
+BACKGROUND
+========================================================= */
 
 body::before{
 content:"";
 position:fixed;
 inset:0;
 background:
-radial-gradient(circle at top left,#ff2f92 0%,transparent 30%),
-radial-gradient(circle at bottom right,#7b2fff 0%,transparent 30%);
-opacity:0.15;
+radial-gradient(circle at top left,#ff2f92 0%,transparent 35%),
+radial-gradient(circle at bottom right,#7b2fff 0%,transparent 35%);
+opacity:0.16;
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+inset:0;
+backdrop-filter:blur(120px);
 z-index:-1;
 }
 
-/* HEADER */
+/* =========================================================
+HEADER
+========================================================= */
 
 header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:24px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 8%;
-border-bottom:1px solid rgba(255,255,255,0.08);
-background:rgba(7,7,11,0.85);
-backdrop-filter:blur(12px);
-position:sticky;
-top:0;
 z-index:999;
+background:rgba(6,6,10,0.65);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
 .logo{
@@ -62,21 +76,21 @@ color:#ff5eb5;
 
 .logo span{
 font-size:32px;
-color:#d9d9d9;
+color:#d7d7d7;
 }
 
 nav{
 display:flex;
-gap:20px;
 align-items:center;
+gap:20px;
 }
 
 nav button{
 background:none;
 border:none;
-color:#ccc;
-cursor:pointer;
+color:#cfcfcf;
 font-size:15px;
+cursor:pointer;
 transition:0.3s;
 }
 
@@ -85,118 +99,249 @@ color:#ff5eb5;
 }
 
 .main-btn{
-background:linear-gradient(90deg,#ff4fa3,#ff73c7);
+background:
+linear-gradient(
+90deg,
+#ff4fa3,
+#ff7ac8
+);
 border:none;
 padding:14px 26px;
-border-radius:30px;
+border-radius:40px;
 color:white;
-cursor:pointer;
 font-weight:700;
+cursor:pointer;
 transition:0.3s;
+box-shadow:0 0 30px rgba(255,79,163,0.25);
 }
 
 .main-btn:hover{
 transform:translateY(-2px);
 }
 
-/* HERO */
+/* =========================================================
+HERO
+========================================================= */
 
 .hero{
-padding:90px 8%;
+min-height:100vh;
 display:flex;
 justify-content:space-between;
-gap:60px;
-align-items:flex-start;
+align-items:center;
+padding:150px 8% 90px;
+gap:70px;
+position:relative;
+}
+
+/* FLOATING ORBS */
+
+.orb{
+position:absolute;
+border-radius:50%;
+filter:blur(70px);
+opacity:0.3;
+animation:float 8s infinite ease-in-out;
+}
+
+.orb1{
+width:300px;
+height:300px;
+background:#ff2f92;
+top:10%;
+left:-100px;
+}
+
+.orb2{
+width:280px;
+height:280px;
+background:#7b2fff;
+bottom:10%;
+right:-80px;
+animation-delay:2s;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-30px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
 }
 
 .left{
-max-width:620px;
+max-width:640px;
+position:relative;
+z-index:2;
 }
 
-.left h1{
-font-size:82px;
-line-height:0.95;
+.badges{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
 margin-bottom:25px;
 }
 
+.badge{
+background:rgba(255,255,255,0.07);
+border:1px solid rgba(255,255,255,0.08);
+padding:10px 16px;
+border-radius:30px;
+font-size:14px;
+color:#ddd;
+backdrop-filter:blur(10px);
+}
+
+.left h1{
+font-size:88px;
+line-height:0.92;
+margin-bottom:25px;
+font-weight:800;
+}
+
 .left h1 span{
-color:#ff5eb5;
+background:linear-gradient(
+90deg,
+#ff4fa3,
+#ff89d2
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .left p{
-color:#aaa;
+font-size:18px;
 line-height:1.8;
+color:#b4b4b4;
 margin-bottom:35px;
-font-size:17px;
+max-width:560px;
 }
 
-.counter{
-margin-top:20px;
+.stats{
+display:flex;
+gap:40px;
+margin-top:35px;
+flex-wrap:wrap;
+}
+
+.stat h2{
+font-size:34px;
 color:#ff73c7;
-font-weight:700;
+margin-bottom:5px;
 }
 
-/* PANEL */
+.stat p{
+font-size:14px;
+color:#888;
+}
+
+/* =========================================================
+ANALYZER PANEL
+========================================================= */
 
 .panel{
-width:520px;
-background:#111118;
+width:530px;
+background:rgba(17,17,24,0.9);
 border:1px solid rgba(255,255,255,0.08);
-border-radius:30px;
-padding:28px;
-box-shadow:0 0 40px rgba(255,79,163,0.1);
+border-radius:35px;
+padding:30px;
+position:relative;
+backdrop-filter:blur(20px);
+box-shadow:
+0 0 60px rgba(255,79,163,0.12);
+z-index:2;
+}
+
+.panel h2{
+margin-bottom:20px;
+font-size:28px;
 }
 
 textarea{
 width:100%;
 height:240px;
-background:#1a1a22;
+background:#1b1b24;
 border:none;
-border-radius:20px;
-padding:20px;
+border-radius:24px;
+padding:22px;
 color:white;
 resize:none;
 font-size:15px;
 margin-bottom:18px;
+outline:none;
+}
+
+textarea::placeholder{
+color:#7d7d86;
 }
 
 .upload{
-background:#1a1a22;
+background:#1b1b24;
 padding:18px;
-border-radius:20px;
+border-radius:24px;
 margin-bottom:18px;
 }
 
 .upload p{
-margin-bottom:10px;
-color:#ccc;
+margin-bottom:12px;
+color:#b8b8b8;
 }
 
 input{
 width:100%;
-padding:15px;
-background:#1a1a22;
+padding:14px;
 border:none;
-border-radius:15px;
+border-radius:16px;
+background:#242430;
 color:white;
-margin-bottom:15px;
 }
 
 .preview{
 width:100%;
-border-radius:18px;
+border-radius:20px;
 margin-top:15px;
 display:none;
-max-height:300px;
+max-height:320px;
 object-fit:cover;
+}
+
+.secondary-btn{
+width:100%;
+margin-top:12px;
+background:transparent;
+border:1px solid rgba(255,255,255,0.1);
+padding:14px;
+border-radius:18px;
+color:#ccc;
+cursor:pointer;
+transition:0.3s;
+}
+
+.secondary-btn:hover{
+background:rgba(255,255,255,0.05);
+}
+
+.loading{
+display:none;
+margin-top:16px;
+color:#ff73c7;
+font-weight:700;
 }
 
 .result{
 margin-top:20px;
-background:rgba(255,255,255,0.04);
-padding:24px;
-border-radius:22px;
 display:none;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+padding:24px;
+border-radius:24px;
 animation:fade 0.4s ease;
 }
 
@@ -214,24 +359,17 @@ transform:translateY(0);
 
 }
 
-.loading{
-display:none;
-margin-top:15px;
-font-weight:700;
-color:#ff73c7;
+/* =========================================================
+SECTIONS
+========================================================= */
+
+.section{
+padding:100px 8%;
 }
 
-/* SECTIONS */
-
-.examples,
-.help{
-padding:90px 8%;
-}
-
-.examples h2,
-.help h2{
-font-size:46px;
-margin-bottom:30px;
+.section h2{
+font-size:52px;
+margin-bottom:35px;
 }
 
 .cards{
@@ -243,8 +381,9 @@ gap:20px;
 .card{
 background:rgba(255,255,255,0.04);
 border:1px solid rgba(255,255,255,0.08);
-border-radius:22px;
-padding:25px;
+padding:28px;
+border-radius:28px;
+backdrop-filter:blur(12px);
 }
 
 .card h3{
@@ -252,36 +391,42 @@ margin-bottom:15px;
 color:#ff73c7;
 }
 
-.help p{
-max-width:850px;
-line-height:1.8;
-color:#aaa;
-}
-
-/* AUTH */
+/* =========================================================
+AUTH
+========================================================= */
 
 .auth{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.85);
+background:rgba(0,0,0,0.82);
 display:none;
 justify-content:center;
 align-items:center;
 z-index:9999;
+backdrop-filter:blur(10px);
 }
 
 .auth-box{
 width:420px;
 background:#111118;
-padding:30px;
-border-radius:25px;
+padding:32px;
+border-radius:30px;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.auth-box h2{
+margin-bottom:20px;
+}
+
+.auth-box input{
+margin-bottom:15px;
 }
 
 .switch{
 margin-top:15px;
 text-align:center;
+color:#8e8e99;
 font-size:14px;
-color:#aaa;
 }
 
 .switch span{
@@ -289,24 +434,29 @@ color:#ff73c7;
 cursor:pointer;
 }
 
-/* FOOTER */
+/* =========================================================
+FOOTER
+========================================================= */
 
 footer{
-padding:50px;
+padding:60px;
 text-align:center;
-color:#777;
+color:#7a7a84;
 }
 
-/* MOBILE */
+/* =========================================================
+MOBILE
+========================================================= */
 
-@media(max-width:950px){
+@media(max-width:980px){
 
 .hero{
 flex-direction:column;
+padding-top:140px;
 }
 
 .left h1{
-font-size:56px;
+font-size:62px;
 }
 
 .panel{
@@ -325,6 +475,10 @@ display:none;
 
 <body>
 
+<!-- =========================================================
+HEADER
+========================================================= -->
+
 <header>
 
 <div class="logo">
@@ -342,8 +496,8 @@ Accueil
 Exemples
 </button>
 
-<button onclick="scrollToSection('help')">
-Aide
+<button onclick="scrollToSection('about')">
+Comment ça marche
 </button>
 
 <button class="main-btn" onclick="openAuth()">
@@ -354,25 +508,53 @@ Connexion
 
 </header>
 
+<!-- =========================================================
+HERO
+========================================================= -->
+
 <section class="hero" id="home">
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
 
 <div class="left">
 
+<div class="badges">
+
+<div class="badge">
+🧠 Emotional AI
+</div>
+
+<div class="badge">
+🚩 Red Flag Scanner
+</div>
+
+<div class="badge">
+💘 Flirt Detection
+</div>
+
+<div class="badge">
+📸 Screenshot Analysis
+</div>
+
+</div>
+
 <h1>
-Analyse les
-<span>DM</span>
-comme une vraie IA
+Découvre ce qu’ils
+<span>ressentent vraiment.</span>
 </h1>
 
 <p>
-DM Tribunal AI détecte automatiquement
+DM Tribunal AI analyse les conversations,
 les intentions émotionnelles,
 les red flags,
 les green flags,
-le flirt,
+la chaleur émotionnelle,
 la froideur,
-la manipulation
-et les dynamiques relationnelles.
+le flirt,
+le désintérêt
+et les dynamiques relationnelles
+grâce à une intelligence artificielle émotionnelle.
 </p>
 
 <button
@@ -382,15 +564,34 @@ onclick="scrollToAnalyzer()"
 Analyser maintenant
 </button>
 
-<div class="counter" id="freeCounter">
-5 analyses gratuites restantes
+<div class="stats">
+
+<div class="stat">
+<h2>2.3M+</h2>
+<p>analyses émotionnelles</p>
+</div>
+
+<div class="stat">
+<h2>94%</h2>
+<p>précision émotionnelle</p>
+</div>
+
+<div class="stat">
+<h2>42</h2>
+<p>pays utilisateurs</p>
 </div>
 
 </div>
+
+</div>
+
+<!-- =========================================================
+ANALYZER
+========================================================= -->
 
 <div class="panel" id="analyzer">
 
-<h2 style="margin-bottom:20px;">
+<h2>
 Nouvelle analyse
 </h2>
 
@@ -411,7 +612,10 @@ accept="image/*"
 onchange="previewImage(event)"
 >
 
-<img id="preview" class="preview">
+<img
+id="preview"
+class="preview"
+>
 
 </div>
 
@@ -420,11 +624,18 @@ class="main-btn"
 style="width:100%;"
 onclick="analyzeConversation()"
 >
-Analyser
+Analyser la conversation
+</button>
+
+<button
+class="secondary-btn"
+onclick="resetConversation()"
+>
+Réinitialiser
 </button>
 
 <div class="loading" id="loading">
-Analyse IA émotionnelle en cours...
+Analyse émotionnelle IA en cours...
 </div>
 
 <div class="result" id="result">
@@ -439,7 +650,11 @@ Analyse IA émotionnelle en cours...
 
 </section>
 
-<section class="examples" id="examples">
+<!-- =========================================================
+EXAMPLES
+========================================================= -->
+
+<section class="section" id="examples">
 
 <h2>
 Exemples d’analyses
@@ -454,11 +669,10 @@ Exemples d’analyses
 </h3>
 
 <p>
-“Bonne nuit princesse ❤️”
+“Bonjour princesse ❤️”
 <br><br>
-Affection, douceur,
-intérêt émotionnel
-et flirt détectés.
+Le tribunal détecte une énergie tendre,
+affectueuse et émotionnellement chaleureuse.
 </p>
 
 </div>
@@ -472,8 +686,8 @@ et flirt détectés.
 <p>
 “oe jsp”
 <br><br>
-Énergie émotionnelle mitigée,
-vibe difficile à lire.
+Énergie émotionnelle floue,
+intention difficile à lire.
 </p>
 
 </div>
@@ -485,7 +699,7 @@ vibe difficile à lire.
 </h3>
 
 <p>
-“vu”
+“vu.”
 <br><br>
 Très forte froideur émotionnelle détectée.
 </p>
@@ -496,36 +710,65 @@ Très forte froideur émotionnelle détectée.
 
 </section>
 
-<section class="help" id="help">
+<!-- =========================================================
+ABOUT
+========================================================= -->
+
+<section class="section" id="about">
 
 <h2>
 Comment fonctionne l’IA ?
 </h2>
 
+<div class="cards">
+
+<div class="card">
+
+<h3>
+🧠 Analyse émotionnelle
+</h3>
+
 <p>
-L’intelligence artificielle analyse :
-<br><br>
-
-• le ton émotionnel
-<br>
-• le niveau d’investissement
-<br>
-• la chaleur ou la froideur
-<br>
-• l’intention derrière les messages
-<br>
-• la tension émotionnelle
-<br>
-• le flirt
-<br>
-• la sécheresse
-<br>
-• l’énergie générale
-<br><br>
-
-Puis elle génère automatiquement
-un verdict émotionnel.
+L’IA analyse la chaleur émotionnelle,
+la douceur,
+le flirt,
+la froideur
+et les intentions derrière les messages.
 </p>
+
+</div>
+
+<div class="card">
+
+<h3>
+💘 Détection relationnelle
+</h3>
+
+<p>
+Le système détecte automatiquement
+les green flags,
+red flags,
+le ghosting,
+le love bombing
+et les dynamiques toxiques.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+📸 Analyse de screenshots
+</h3>
+
+<p>
+Ajoute des captures d’écran
+pour obtenir une analyse émotionnelle complète.
+</p>
+
+</div>
+
+</div>
 
 </section>
 
@@ -533,7 +776,9 @@ un verdict émotionnel.
 © 2026 — DM Tribunal AI
 </footer>
 
-<!-- AUTH -->
+<!-- =========================================================
+AUTH
+========================================================= -->
 
 <div class="auth" id="auth">
 
@@ -590,17 +835,6 @@ CONFIG
 ========================================================= */
 
 let loginMode = true;
-let freeAnalyses = 5;
-
-const savedAnalyses =
-localStorage.getItem("freeAnalyses");
-
-if(savedAnalyses !== null){
-
-freeAnalyses =
-parseInt(savedAnalyses);
-
-}
 
 /* =========================================================
 AUTH
@@ -672,78 +906,17 @@ document.getElementById("username").value;
 const password =
 document.getElementById("password").value;
 
-const email =
-document.getElementById("email").value;
+if(username === "" || password === ""){
 
-if(loginMode){
-
-const users =
-JSON.parse(localStorage.getItem("users")) || [];
-
-const user =
-users.find(
-u =>
-u.username === username &&
-u.password === password
-);
-
-if(!user){
-
-alert("Identifiants incorrects");
+alert("Remplis tous les champs");
 
 return;
 
 }
 
-localStorage.setItem(
-"loggedIn",
-"true"
-);
-
-localStorage.setItem(
-"loggedUser",
-username
-);
-
 alert("Connexion réussie ✅");
 
 closeAuth();
-
-}
-
-else{
-
-const users =
-JSON.parse(localStorage.getItem("users")) || [];
-
-users.push({
-username,
-password,
-email
-});
-
-localStorage.setItem(
-"users",
-JSON.stringify(users)
-);
-
-localStorage.setItem(
-"loggedIn",
-"true"
-);
-
-localStorage.setItem(
-"loggedUser",
-username
-);
-
-alert("Compte créé ✅");
-
-closeAuth();
-
-}
-
-updateFreeCounter();
 
 }
 
@@ -768,32 +941,22 @@ preview.style.display = "block";
 }
 
 /* =========================================================
-COUNTER
+RESET
 ========================================================= */
 
-function updateFreeCounter(){
+function resetConversation(){
 
-const isLoggedIn =
-localStorage.getItem("loggedIn");
+document
+.getElementById("conversation")
+.value = "";
 
-const counter =
-document.getElementById("freeCounter");
+document
+.getElementById("preview")
+.style.display = "none";
 
-if(isLoggedIn){
-
-counter.innerHTML =
-"Connecté en tant que : " +
-localStorage.getItem("loggedUser");
-
-}
-
-else{
-
-counter.innerHTML =
-freeAnalyses +
-" analyses gratuites restantes";
-
-}
+document
+.getElementById("result")
+.style.display = "none";
 
 }
 
@@ -802,24 +965,6 @@ IA ÉMOTIONNELLE
 ========================================================= */
 
 async function analyzeConversation(){
-
-const isLoggedIn =
-localStorage.getItem("loggedIn");
-
-if(
-freeAnalyses <= 0 &&
-!isLoggedIn
-){
-
-alert(
-"Tu as utilisé tes 5 analyses gratuites."
-);
-
-openAuth();
-
-return;
-
-}
 
 const text =
 document
@@ -853,65 +998,99 @@ result.style.display = "none";
 /* SIMULATION IA */
 
 await new Promise(resolve =>
-setTimeout(resolve,1800)
+setTimeout(resolve,1600)
 );
-
-/* =========================================================
-ANALYSE AVANCÉE
-========================================================= */
-
-let affection = 0;
-let tension = 0;
-let investment = 0;
-let coldness = 0;
-let enthusiasm = 0;
 
 const lower = text.toLowerCase();
 
-/* LONGUEUR */
+/* =========================================================
+ANALYSE INTELLIGENTE
+========================================================= */
+
+let warmth = 0;
+let affection = 0;
+let coldness = 0;
+let tension = 0;
+let effort = 0;
+
+/* =========================================================
+LONGUEUR
+========================================================= */
 
 if(text.length > 40){
 
-investment += 2;
+effort += 2;
 
 }
 
 if(text.length > 120){
 
-investment += 3;
+effort += 3;
 
 }
 
-if(text.length > 250){
-
-investment += 4;
-
-}
-
-/* QUESTIONS */
-
-const questions =
-(text.match(/\?/g) || []).length;
-
-investment += questions;
-
-/* EXCLAMATIONS */
+/* =========================================================
+PONCTUATION
+========================================================= */
 
 const exclamations =
 (text.match(/!/g) || []).length;
 
-enthusiasm += exclamations;
+warmth += exclamations;
 
-/* EMOJIS */
+const questions =
+(text.match(/\?/g) || []).length;
+
+effort += questions;
+
+/* =========================================================
+EMOJIS
+========================================================= */
 
 const positiveEmojis =
 (text.match(
-/❤️|💕|💖|🥰|😍|😘|🫶|😊|☺️|😭|😩|😻/g
+/❤️|💕|💖|🥰|😍|😘|🫶|☺️|😊|😭|😩|😻/g
 ) || []).length;
 
 affection += positiveEmojis * 2;
 
-/* EXPRESSIVITÉ */
+/* =========================================================
+FORMULATIONS AFFECTUEUSES
+========================================================= */
+
+const affectionatePatterns = [
+
+"princesse",
+"mon coeur",
+"mon cœur",
+"bb",
+"bébé",
+"mon ange",
+"bonne nuit",
+"prends soin",
+"tu me manques",
+"jtm",
+"je t'aime",
+"love",
+"cutie",
+"babe"
+
+];
+
+affectionatePatterns.forEach(word=>{
+
+if(lower.includes(word)){
+
+affection += 8;
+warmth += 5;
+
+}
+
+});
+
+/* =========================================================
+RIRE / EXPRESSIVITÉ
+========================================================= */
 
 if(
 lower.includes("ahah") ||
@@ -919,77 +1098,87 @@ lower.includes("mdrrrr") ||
 lower.includes("ptddddr")
 ){
 
-enthusiasm += 3;
-affection += 1;
+warmth += 4;
 
 }
 
-/* DOUCEUR */
+/* =========================================================
+FROIDEUR
+========================================================= */
+
+const dryPatterns = [
+
+"vu",
+"ok.",
+"cool.",
+"oe",
+"jsp",
+"d'accord"
+
+];
+
+dryPatterns.forEach(word=>{
+
+if(lower === word){
+
+coldness += 7;
+
+}
+
+});
+
+/* =========================================================
+AGRESSIVITÉ
+========================================================= */
+
+const aggressivePatterns = [
+
+"tg",
+"ta gueule",
+"ferme la",
+"casse toi",
+"arrête"
+
+];
+
+aggressivePatterns.forEach(word=>{
+
+if(lower.includes(word)){
+
+tension += 8;
+
+}
+
+});
+
+/* =========================================================
+ANALYSE CONTEXTUELLE
+========================================================= */
 
 if(
-lower.includes("bonne nuit") ||
-lower.includes("prends soin") ||
-lower.includes("princesse") ||
-lower.includes("mon coeur") ||
-lower.includes("jtm") ||
-lower.includes("je t'aime") ||
-lower.includes("tu me manques")
+lower.includes("bonjour") &&
+affection > 0
 ){
 
-affection += 5;
+warmth += 6;
 
 }
 
-/* FROIDEUR */
+/* IMPORTANT :
+Les petits messages affectueux
+ne sont PLUS pénalisés.
+*/
 
-if(text.length <= 8){
-
-coldness += 4;
-
-}
-
-if(
-lower.includes("vu") ||
-lower.includes("ok.") ||
-lower.includes("cool.") ||
-lower.includes("jsp")
-){
-
-coldness += 3;
-
-}
-
-/* AGRESSIVITÉ */
-
-if(
-lower.includes("tg") ||
-lower.includes("ta gueule") ||
-lower.includes("ferme la") ||
-lower.includes("casse toi")
-){
-
-tension += 6;
-
-}
-
-/* MULTI QUESTION */
-
-if(
-text.includes("???")
-){
-
-tension += 2;
-
-}
-
-/* SCORE */
+/* =========================================================
+SCORE FINAL
+========================================================= */
 
 const finalScore =
 
 (
+warmth +
 affection +
-investment +
-enthusiasm
+effort
 )
 
 -
@@ -1008,20 +1197,20 @@ result.style.display = "block";
 
 /* ACQUITTÉ */
 
-if(finalScore >= 7){
+if(finalScore >= 10){
 
 verdict.innerHTML =
-"🟢 ACQUITTÉ";
+"🟢 TOTALEMENT ACQUITTÉ";
 
 const positiveTexts = [
 
-"Très forte chaleur émotionnelle détectée. La conversation paraît sincère, investie et affectueuse.",
+"Très forte chaleur émotionnelle détectée. Le message paraît sincère, tendre et affectueux.",
 
-"Le tribunal détecte beaucoup de green flags et une vraie connexion émotionnelle.",
+"L’IA détecte une énergie émotionnellement chaleureuse et investie.",
 
-"L’énergie générale paraît douce, naturelle et émotionnellement réciproque.",
+"Flirt, douceur et attention émotionnelle détectés.",
 
-"Flirt, attention et investissement émotionnel détectés."
+"La vibe générale paraît très positive et émotionnellement safe."
 
 ];
 
@@ -1047,11 +1236,11 @@ const negativeTexts = [
 
 "Très forte froideur émotionnelle détectée.",
 
-"Le tribunal détecte une énergie distante ou déséquilibrée.",
+"L’IA détecte une énergie émotionnelle distante ou sèche.",
 
-"La conversation paraît émotionnellement sèche ou tendue.",
+"Le message paraît émotionnellement fermé ou tendu.",
 
-"Ghosting, désintérêt ou red flags potentiels détectés."
+"Red flags ou désintérêt émotionnel potentiels détectés."
 
 ];
 
@@ -1075,13 +1264,13 @@ verdict.innerHTML =
 
 const neutralTexts = [
 
-"La conversation paraît émotionnellement mitigée.",
+"L’énergie émotionnelle paraît mitigée ou difficile à lire.",
 
-"Le mood général semble hésitant ou difficile à lire.",
+"Le message contient quelques efforts émotionnels mais reste ambigu.",
 
-"Quelques efforts sont visibles mais la dynamique reste floue.",
+"La vibe générale paraît hésitante.",
 
-"Le tribunal détecte une énergie émotionnelle instable."
+"Intention émotionnelle difficile à déterminer."
 
 ];
 
@@ -1096,7 +1285,9 @@ neutralTexts.length
 
 }
 
-/* DETAILS */
+/* =========================================================
+DETAILS
+========================================================= */
 
 analysis.innerHTML +=
 
@@ -1109,13 +1300,13 @@ ${Math.max(0,affection)}
 
 <br>
 
-✨ Investissement :
-${Math.max(0,investment)}
+🔥 Chaleur émotionnelle :
+${Math.max(0,warmth)}
 
 <br>
 
-⚡ Énergie :
-${Math.max(0,enthusiasm)}
+✨ Investissement :
+${Math.max(0,effort)}
 
 <br>
 
@@ -1128,35 +1319,6 @@ ${Math.max(0,coldness)}
 ${Math.max(0,tension)}
 
 `;
-
-/* RESET */
-
-setTimeout(()=>{
-
-document
-.getElementById("conversation")
-.value = "";
-
-document
-.getElementById("preview")
-.style.display = "none";
-
-},1000);
-
-/* FREE ANALYSES */
-
-if(!isLoggedIn){
-
-freeAnalyses--;
-
-localStorage.setItem(
-"freeAnalyses",
-freeAnalyses
-);
-
-}
-
-updateFreeCounter();
 
 }
 
@@ -1185,7 +1347,7 @@ behavior:"smooth"
 }
 
 /* =========================================================
-CLICK OUTSIDE
+CLICK OUTSIDE AUTH
 ========================================================= */
 
 window.onclick = function(event){
@@ -1198,16 +1360,6 @@ if(event.target === auth){
 closeAuth();
 
 }
-
-};
-
-/* =========================================================
-LOAD
-========================================================= */
-
-window.onload = () => {
-
-updateFreeCounter();
 
 };
 
