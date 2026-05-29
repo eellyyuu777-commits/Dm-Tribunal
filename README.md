@@ -8,7 +8,14 @@
 
 <title>DM Tribunal AI</title>
 
+<!-- OCR IA IMAGE -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
 <style>
+
+/* =========================================================
+RESET
+========================================================= */
 
 *{
 margin:0;
@@ -60,8 +67,8 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 z-index:999;
-background:rgba(6,6,10,0.65);
-backdrop-filter:blur(18px);
+background:rgba(6,6,10,0.7);
+backdrop-filter:blur(20px);
 border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
@@ -76,21 +83,21 @@ color:#ff5eb5;
 
 .logo span{
 font-size:32px;
-color:#d7d7d7;
+color:#d8d8d8;
 }
 
 nav{
 display:flex;
-align-items:center;
 gap:20px;
+align-items:center;
 }
 
 nav button{
 background:none;
 border:none;
-color:#cfcfcf;
-font-size:15px;
+color:#d0d0d0;
 cursor:pointer;
+font-size:15px;
 transition:0.3s;
 }
 
@@ -133,30 +140,28 @@ gap:70px;
 position:relative;
 }
 
-/* FLOATING ORBS */
-
 .orb{
 position:absolute;
 border-radius:50%;
-filter:blur(70px);
+filter:blur(80px);
 opacity:0.3;
 animation:float 8s infinite ease-in-out;
 }
 
 .orb1{
-width:300px;
-height:300px;
+width:320px;
+height:320px;
 background:#ff2f92;
 top:10%;
 left:-100px;
 }
 
 .orb2{
-width:280px;
-height:280px;
+width:300px;
+height:300px;
 background:#7b2fff;
-bottom:10%;
-right:-80px;
+bottom:5%;
+right:-100px;
 animation-delay:2s;
 }
 
@@ -177,7 +182,7 @@ transform:translateY(0px);
 }
 
 .left{
-max-width:640px;
+max-width:650px;
 position:relative;
 z-index:2;
 }
@@ -354,7 +359,7 @@ transform:translateY(10px);
 
 to{
 opacity:1;
-transform:translateY(0);
+transform:translateY(0px);
 }
 
 }
@@ -383,7 +388,6 @@ background:rgba(255,255,255,0.04);
 border:1px solid rgba(255,255,255,0.08);
 padding:28px;
 border-radius:28px;
-backdrop-filter:blur(12px);
 }
 
 .card h3{
@@ -521,21 +525,10 @@ HERO
 
 <div class="badges">
 
-<div class="badge">
-🧠 Emotional AI
-</div>
-
-<div class="badge">
-🚩 Red Flag Scanner
-</div>
-
-<div class="badge">
-💘 Flirt Detection
-</div>
-
-<div class="badge">
-📸 Screenshot Analysis
-</div>
+<div class="badge">🧠 Emotional AI</div>
+<div class="badge">🚩 Red Flag Scanner</div>
+<div class="badge">💘 Flirt Detection</div>
+<div class="badge">📸 Screenshot Analysis</div>
 
 </div>
 
@@ -545,16 +538,15 @@ Découvre ce qu’ils
 </h1>
 
 <p>
-DM Tribunal AI analyse les conversations,
+DM Tribunal AI analyse automatiquement
+les conversations,
+les screenshots,
 les intentions émotionnelles,
-les red flags,
-les green flags,
-la chaleur émotionnelle,
+la chaleur,
 la froideur,
-le flirt,
-le désintérêt
-et les dynamiques relationnelles
-grâce à une intelligence artificielle émotionnelle.
+les red flags,
+les green flags
+et les dynamiques relationnelles.
 </p>
 
 <button
@@ -609,6 +601,7 @@ Ajouter une capture d’écran
 <input
 type="file"
 accept="image/*"
+id="imageInput"
 onchange="previewImage(event)"
 >
 
@@ -665,14 +658,13 @@ Exemples d’analyses
 <div class="card">
 
 <h3>
-🟢 ACQUITTÉ
+🟢 TOTALEMENT ACQUITTÉ
 </h3>
 
 <p>
 “Bonjour princesse ❤️”
 <br><br>
-Le tribunal détecte une énergie tendre,
-affectueuse et émotionnellement chaleureuse.
+Très forte chaleur émotionnelle détectée.
 </p>
 
 </div>
@@ -686,8 +678,7 @@ affectueuse et émotionnellement chaleureuse.
 <p>
 “oe jsp”
 <br><br>
-Énergie émotionnelle floue,
-intention difficile à lire.
+Énergie émotionnelle mitigée.
 </p>
 
 </div>
@@ -731,9 +722,9 @@ Comment fonctionne l’IA ?
 <p>
 L’IA analyse la chaleur émotionnelle,
 la douceur,
-le flirt,
-la froideur
-et les intentions derrière les messages.
+la froideur,
+les intentions
+et les dynamiques relationnelles.
 </p>
 
 </div>
@@ -745,12 +736,11 @@ et les intentions derrière les messages.
 </h3>
 
 <p>
-Le système détecte automatiquement
-les green flags,
-red flags,
-le ghosting,
-le love bombing
-et les dynamiques toxiques.
+Détection automatique
+des red flags,
+green flags,
+du flirt
+et du désintérêt émotionnel.
 </p>
 
 </div>
@@ -762,8 +752,8 @@ et les dynamiques toxiques.
 </h3>
 
 <p>
-Ajoute des captures d’écran
-pour obtenir une analyse émotionnelle complète.
+Le site peut lire automatiquement
+le texte présent dans les captures d’écran.
 </p>
 
 </div>
@@ -790,28 +780,25 @@ Connexion
 
 <input
 type="text"
-id="username"
 placeholder="Nom d'utilisateur"
 >
 
 <input
 type="email"
-id="email"
 placeholder="Adresse mail"
 style="display:none;"
+id="emailField"
 >
 
 <input
 type="password"
-id="password"
 placeholder="Mot de passe"
 >
 
 <button
 class="main-btn"
 style="width:100%;"
-onclick="submitAuth()"
-id="authButton"
+onclick="closeAuth()"
 >
 Se connecter
 </button>
@@ -831,14 +818,10 @@ Pas encore de compte ? Créer un compte
 <script>
 
 /* =========================================================
-CONFIG
+AUTH
 ========================================================= */
 
 let loginMode = true;
-
-/* =========================================================
-AUTH
-========================================================= */
 
 function openAuth(){
 
@@ -861,25 +844,20 @@ loginMode = !loginMode;
 const title =
 document.getElementById("authTitle");
 
-const button =
-document.getElementById("authButton");
+const email =
+document.getElementById("emailField");
 
 const switchText =
 document.querySelector(".switch span");
-
-const emailField =
-document.getElementById("email");
 
 if(loginMode){
 
 title.innerHTML = "Connexion";
 
-button.innerHTML = "Se connecter";
+email.style.display = "none";
 
 switchText.innerHTML =
 "Pas encore de compte ? Créer un compte";
-
-emailField.style.display = "none";
 
 }
 
@@ -887,36 +865,12 @@ else{
 
 title.innerHTML = "Créer un compte";
 
-button.innerHTML = "Créer le compte";
+email.style.display = "block";
 
 switchText.innerHTML =
 "Déjà un compte ? Se connecter";
 
-emailField.style.display = "block";
-
 }
-
-}
-
-function submitAuth(){
-
-const username =
-document.getElementById("username").value;
-
-const password =
-document.getElementById("password").value;
-
-if(username === "" || password === ""){
-
-alert("Remplis tous les champs");
-
-return;
-
-}
-
-alert("Connexion réussie ✅");
-
-closeAuth();
 
 }
 
@@ -958,27 +912,30 @@ document
 .getElementById("result")
 .style.display = "none";
 
+document
+.getElementById("imageInput")
+.value = "";
+
 }
 
 /* =========================================================
-IA ÉMOTIONNELLE
+IA ANALYSE
 ========================================================= */
 
 async function analyzeConversation(){
 
-const text =
+const textarea =
 document
-.getElementById("conversation")
-.value
-.trim();
+.getElementById("conversation");
 
-if(text === ""){
+let text =
+textarea.value.trim();
 
-alert("Ajoute une conversation");
+const fileInput =
+document.getElementById("imageInput");
 
-return;
-
-}
+const file =
+fileInput.files[0];
 
 const loading =
 document.getElementById("loading");
@@ -992,19 +949,67 @@ document.getElementById("verdict");
 const analysis =
 document.getElementById("analysis");
 
+/* =========================================================
+VÉRIFICATION
+========================================================= */
+
+if(text === "" && !file){
+
+alert(
+"Ajoute une conversation ou une image"
+);
+
+return;
+
+}
+
 loading.style.display = "block";
 result.style.display = "none";
 
-/* SIMULATION IA */
+/* =========================================================
+OCR IMAGE
+========================================================= */
 
-await new Promise(resolve =>
-setTimeout(resolve,1600)
+if(file){
+
+try{
+
+const {
+data:{ text:imageText }
+}
+
+=
+
+await Tesseract.recognize(
+file,
+'fra+eng'
 );
 
-const lower = text.toLowerCase();
+text += " " + imageText;
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+}
 
 /* =========================================================
-ANALYSE INTELLIGENTE
+SIMULATION IA
+========================================================= */
+
+await new Promise(resolve =>
+setTimeout(resolve,1200)
+);
+
+const lower =
+text.toLowerCase();
+
+/* =========================================================
+ANALYSE ÉMOTIONNELLE
 ========================================================= */
 
 let warmth = 0;
@@ -1013,9 +1018,7 @@ let coldness = 0;
 let tension = 0;
 let effort = 0;
 
-/* =========================================================
-LONGUEUR
-========================================================= */
+/* LONGUEUR */
 
 if(text.length > 40){
 
@@ -1029,23 +1032,21 @@ effort += 3;
 
 }
 
-/* =========================================================
-PONCTUATION
-========================================================= */
-
-const exclamations =
-(text.match(/!/g) || []).length;
-
-warmth += exclamations;
+/* QUESTIONS */
 
 const questions =
 (text.match(/\?/g) || []).length;
 
 effort += questions;
 
-/* =========================================================
-EMOJIS
-========================================================= */
+/* EXCLAMATIONS */
+
+const exclamations =
+(text.match(/!/g) || []).length;
+
+warmth += exclamations;
+
+/* EMOJIS */
 
 const positiveEmojis =
 (text.match(
@@ -1054,9 +1055,7 @@ const positiveEmojis =
 
 affection += positiveEmojis * 2;
 
-/* =========================================================
-FORMULATIONS AFFECTUEUSES
-========================================================= */
+/* AFFECTION */
 
 const affectionatePatterns = [
 
@@ -1088,9 +1087,7 @@ warmth += 5;
 
 });
 
-/* =========================================================
-RIRE / EXPRESSIVITÉ
-========================================================= */
+/* RIRE */
 
 if(
 lower.includes("ahah") ||
@@ -1102,9 +1099,7 @@ warmth += 4;
 
 }
 
-/* =========================================================
-FROIDEUR
-========================================================= */
+/* FROIDEUR */
 
 const dryPatterns = [
 
@@ -1127,9 +1122,7 @@ coldness += 7;
 
 });
 
-/* =========================================================
-AGRESSIVITÉ
-========================================================= */
+/* AGRESSIVITÉ */
 
 const aggressivePatterns = [
 
@@ -1151,23 +1144,17 @@ tension += 8;
 
 });
 
-/* =========================================================
-ANALYSE CONTEXTUELLE
-========================================================= */
+/* BONUS AFFECTUEUX */
 
 if(
 lower.includes("bonjour") &&
 affection > 0
 ){
 
-warmth += 6;
+warmth += 10;
+affection += 5;
 
 }
-
-/* IMPORTANT :
-Les petits messages affectueux
-ne sont PLUS pénalisés.
-*/
 
 /* =========================================================
 SCORE FINAL
@@ -1189,13 +1176,13 @@ tension
 );
 
 /* =========================================================
-VERDICTS
+RESULT
 ========================================================= */
 
 loading.style.display = "none";
 result.style.display = "block";
 
-/* ACQUITTÉ */
+/* POSITIF */
 
 if(finalScore >= 10){
 
@@ -1204,13 +1191,13 @@ verdict.innerHTML =
 
 const positiveTexts = [
 
-"Très forte chaleur émotionnelle détectée. Le message paraît sincère, tendre et affectueux.",
+"Très forte chaleur émotionnelle détectée.",
 
-"L’IA détecte une énergie émotionnellement chaleureuse et investie.",
+"L’IA détecte une énergie affectueuse et sincère.",
 
-"Flirt, douceur et attention émotionnelle détectés.",
+"Le message paraît tendre et émotionnellement safe.",
 
-"La vibe générale paraît très positive et émotionnellement safe."
+"Flirt, douceur et attention émotionnelle détectés."
 
 ];
 
@@ -1223,9 +1210,9 @@ positiveTexts.length
 )
 ];
 
-/* CONDAMNÉ */
-
 }
+
+/* NÉGATIF */
 
 else if(finalScore <= 0){
 
@@ -1236,11 +1223,11 @@ const negativeTexts = [
 
 "Très forte froideur émotionnelle détectée.",
 
-"L’IA détecte une énergie émotionnelle distante ou sèche.",
+"L’énergie paraît émotionnellement distante.",
 
-"Le message paraît émotionnellement fermé ou tendu.",
+"Le tribunal détecte une vibe sèche.",
 
-"Red flags ou désintérêt émotionnel potentiels détectés."
+"Red flags potentiels détectés."
 
 ];
 
@@ -1253,9 +1240,9 @@ negativeTexts.length
 )
 ];
 
-/* COUPABLE */
-
 }
+
+/* MITIGÉ */
 
 else{
 
@@ -1264,13 +1251,13 @@ verdict.innerHTML =
 
 const neutralTexts = [
 
-"L’énergie émotionnelle paraît mitigée ou difficile à lire.",
+"Énergie émotionnelle mitigée.",
 
-"Le message contient quelques efforts émotionnels mais reste ambigu.",
+"Vibe émotionnelle difficile à lire.",
 
-"La vibe générale paraît hésitante.",
+"Quelques efforts détectés mais dynamique floue.",
 
-"Intention émotionnelle difficile à déterminer."
+"Le message paraît émotionnellement ambigu."
 
 ];
 
@@ -1285,9 +1272,7 @@ neutralTexts.length
 
 }
 
-/* =========================================================
-DETAILS
-========================================================= */
+/* DETAILS */
 
 analysis.innerHTML +=
 
@@ -1319,6 +1304,20 @@ ${Math.max(0,coldness)}
 ${Math.max(0,tension)}
 
 `;
+
+/* RESET */
+
+setTimeout(()=>{
+
+textarea.value = "";
+
+document
+.getElementById("preview")
+.style.display = "none";
+
+fileInput.value = "";
+
+},1000);
 
 }
 
